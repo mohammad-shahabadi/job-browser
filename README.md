@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# job-browser
 Job Browser Task
 =======
 <p align="center">
@@ -26,79 +24,81 @@ Job Browser Task
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# 🚀 Job Browser - NestJS
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a **NestJS-based Job API** that fetches job offers from two external APIs, transforms the data into a unified structure, stores it in a PostgreSQL database, and provides an API endpoint to retrieve and filter the transformed job listings.
 
-## Project setup
+---
 
-```bash
-$ yarn install
+## 🛠 Running the Project with Docker
+
+To run the project using **Docker**, follow these steps:
+
+### 1️⃣ Build and Start the Docker Container
+Run the following command to **build and start** the application:
+
+```sh
+docker-compose up --build
 ```
 
-## Compile and run the project
+### 2️⃣ Stop the Application
+To stop the running container, use:
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+```sh
+docker-compose down
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ yarn run test
+## Implementation and Models
+- **Database Model**: The Job entity model is located in `src/job/entity` and it's based on schemas of given apis with additional fields
+to consider scalability
+- **Api adaptors**: For each given api an adaptor has been implemented (located in `src/job/adaptor`) with an override method called fetch jobs that tries to fetch jobs
+and convert the result to a specific Job DTO which will be used later to convert to entity.
+- **Cron job:** The written cron job calls fetch jobs on each adaptor and saves the jobs that have not been stored in
+database by checking their job id uniqueness.
 
-# e2e tests
-$ yarn run test:e2e
+## 📖 API & Configuration
 
-# test coverage
-$ yarn run test:cov
+- **Swagger Documentation**: The API documentation is available at [`/api-docs/`](http://localhost:3000/api-docs/).
+- **API Endpoint**: The job offers can be retrieved via the following endpoint:
+  - `GET /api/job-offers`
+  - Supports filtering by job title, location, salary range, etc.
+  - Implements pagination and error handling.
+- **Cron Job Execution**: The application periodically fetches job data from external APIs using a scheduled cron job.
+  - The scheduling frequency is **configurable** via environment variables.
+  - The cron job ensures job listings stay updated without duplicates.
+- **Environment Variables**: The project requires an `.env` file for configuration.
+  - Copy `.env.example` to `.env` and update it with the necessary values before running the application.
+
+---
+
+## ✅ Testing
+
+This project includes **tests** for **services, mappers, and adapters**, along with **E2E tests**.
+
+### **1️⃣ Unit Tests**
+Unit tests are located in **their respective folders**:
+- **Service** → `/src/job/`
+- **Mappers** → `/src/job/mapper/`
+- **Adapters** → `/src/job/adapters/`
+
+To run unit tests, use:
+
+```sh
+yarn test
 ```
 
-## Deployment
+### **2️⃣ End-to-End (E2E) Tests**
+E2E tests are located in:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g mau
-$ mau deploy
+```
+/test/
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+To run E2E tests, use:
 
-## Resources
+```sh
+yarn test:e2e
+```
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
->>>>>>> 8fec84b (feat: init project)
