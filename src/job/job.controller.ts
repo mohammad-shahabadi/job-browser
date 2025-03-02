@@ -5,11 +5,11 @@ import { JobDto } from './dto/job.dto';
 import { JobFilterDto } from './dto/job-filter.dto';
 import { ResponseListDto } from '../common/dto/response-list.dto';
 
-@Controller('job')
+@Controller()
 export class JobController {
   constructor(private readonly jobService: JobService) {}
 
-  @Get()
+  @Get('job-offers')
   @ApiResponse({
     status: 200,
     description: 'Returns a list of job offers',
