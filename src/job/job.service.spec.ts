@@ -162,8 +162,8 @@ describe('JobService', () => {
       const filterDto: JobFilterDto = {
         title: 'Developer',
         location: 'Remote',
-        page: 1,
-        pageSize: 10,
+        page: '1',
+        pageSize: '10',
       };
 
       const result: ResponseListDto<JobDto> = await jobService.getJobs(
@@ -193,8 +193,8 @@ describe('JobService', () => {
 
       const filterDto: JobFilterDto = {
         title: 'Nonexistent Job',
-        page: 1,
-        pageSize: 10,
+        page: '1',
+        pageSize: '10',
       };
 
       const result: ResponseListDto<JobDto> = await jobService.getJobs(

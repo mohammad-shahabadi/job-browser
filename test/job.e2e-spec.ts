@@ -77,6 +77,6 @@ describe('JobController (E2E)', () => {
     const response = await request(app.getHttpServer()).get('/job').query(req);
 
     expect(response.status).toBe(200);
-    expect(jobService.getJobs).toHaveBeenCalledWith(req, '1', '5');
+    expect(jobService.getJobs).toHaveBeenCalledWith(req, 1, 5);
   });
 });
